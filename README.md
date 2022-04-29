@@ -13,8 +13,8 @@ _Desplegado con [Vercel](https://vercel.com/)_
 - [ReactJS](https://maven.apache.org/) - v18.1.0
 ## Autores
 
-* **Alexis López** - *Documentación* - [Alexs18](https://github.com/Alexs18)
-* **Juan Ceballos** - *Trabajo Inicial* - [jceballos29](https://github.com/jceballos29)
+* **Alexis López** - *Programador* - [Alexs18](https://github.com/Alexs18)
+* **Juan Ceballos** - *Programador* - [jceballos29](https://github.com/jceballos29)
 
 ## Licencia
 
