@@ -1,9 +1,15 @@
-
+import { Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import Loading from './pages/Loading';
+import AppRoutes from './routes/routes';
+ 
 const App = () => {
   return (
-    <main className='App'>
-      <h1>Job Search App</h1>
-    </main>
+    <BrowserRouter>
+      <Suspense fallback={<Loading />}>
+        <AppRoutes />
+      </Suspense>
+    </BrowserRouter>
   );
 };
 
