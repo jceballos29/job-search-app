@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/home.scss";
+import "../assets/styles/home.scss";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const Home = () => {

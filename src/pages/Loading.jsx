@@ -1,8 +1,11 @@
 import React from 'react'
+import BarLoader from '../components/BarLoader'
 
 const Loading = () => {
   return (
-    <div>Loading..</div>
+    <div className='loading'>
+      <BarLoader />
+    </div>
   )
 }
 

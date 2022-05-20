@@ -1,0 +1,28 @@
+$bars: linear-gradient(#03a84e 0 0);
+
+.bars_loader {
+  width: 120px;
+  height: 160px;
+  background: linear-gradient(#03a84e 0 0) 0% 50%, linear-gradient(#03a84e 0 0) 50% 50%, linear-gradient(#03a84e 0 0) 100% 50%;
+  background-size: 23px 50%;
+  background-repeat: no-repeat;
+  animation: loader 1s infinite linear alternate;
+}
+
+@keyframes loader {
+  20% {
+    background-size: 23px 20%, 23px 50%, 23px 50%;
+  }
+
+  40% {
+    background-size: 23px 100%, 23px 20%, 23px 50%;
+  }
+
+  60% {
+    background-size: 23px 50%, 23px 100%, 23px 20%;
+  }
+
+  80% {
+    background-size: 23px 50%, 23px 50%, 23px 100%;
+  }
+}
