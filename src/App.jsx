@@ -10,21 +10,26 @@ import auth from "./api/auth";
 const App = () => {
   const context = useContext(authContext);
 
+  const token = localStorage.getItem("jobSearchToken");
+
   useEffect(() => {
+    // TODO: Validar funcionalidad, al poner 'context' en el array de dependencias se genera bucle infinito
     const validate = async () => {
-      const token = localStorage.getItem("jobSearchToken");
       if (token) {
-        const result = await auth.validate(token);
+        const result = await auth.validate();
         if (result.status === 200) {
           context.setAuth({
             isAuthenticated: true,
             user: result.data.user,
+            loading: false,
           });
         }
       }
     };
-    validate();
-  }, []);
+    if (!context.auth.isAuthenticated) {
+      validate();
+    }
+  }, [context, token]);
 
   return (
     <BrowserRouter>
