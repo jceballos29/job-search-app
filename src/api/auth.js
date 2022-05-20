@@ -3,7 +3,7 @@ import authHeader from "../utils/authHeader";
 
 const login = async (user) => {
   try {
-    const response = await axios.post("/auth/login", user);
+    const response = await axios.post("/api/auth/login", user);
     if (response.data.token) {
       localStorage.setItem("jobSearchToken", response.data.token);
       return response;
@@ -15,7 +15,7 @@ const login = async (user) => {
 
 const register = async (user) => {
   try {
-    const response = await axios.post("/auth/signup", user);
+    const response = await axios.post("/api/auth/signup", user);
     if (response.data.token) {
       localStorage.setItem("jobSearchToken", response.data.token);
       return response;
@@ -28,7 +28,7 @@ const register = async (user) => {
 const validate = async () => {
   try {
     const response = await axios.post(
-      "/auth/validate",
+      "/api/auth/validate",
       {},
       { headers: authHeader() }
     );

@@ -13,7 +13,6 @@ const App = () => {
   const token = localStorage.getItem("jobSearchToken");
 
   useEffect(() => {
-    // TODO: Validar funcionalidad, al poner 'context' en el array de dependencias se genera bucle infinito
     const validate = async () => {
       if (token) {
         const result = await auth.validate();

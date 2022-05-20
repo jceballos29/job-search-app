@@ -31,10 +31,8 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     context.setAuth({ ...context.auth, loading: true });
     const result = await auth.login(data);
-    console.log(result);
     if (result.status === 200) {
       context.setAuth({
         isAuthenticated: true,

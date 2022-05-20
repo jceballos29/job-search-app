@@ -6,7 +6,7 @@ import App from "./App";
 import AuthContext from "./context/AuthContext";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://backendnodejstzuzulcode.uw.r.appspot.com/api";
+axios.defaults.baseURL = "https://backendnodejstzuzulcode.uw.r.appspot.com";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
