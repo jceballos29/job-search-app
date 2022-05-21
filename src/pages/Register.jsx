@@ -15,15 +15,38 @@ import Image from "react-image-webp";
 import logo from "../assets/images/logo_invert.jpg";
 import backgroundImage from "../assets/images/register.jpg";
 import backgroundImageWebp from "../assets/images/register.webp";
+import { useContext } from "react";
+import { authContext } from "../context/AuthContext";
+import auth from "../api/auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const context = useContext(authContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    context.setAuth({ ...context.auth, loading: true });
+    const result = await auth.register(data);
+    if (result.status === 200) {
+      context.setAuth({
+        isAuthenticated: true,
+        user: result.data.user,
+        loading: false,
+      });
+      toast.success("Registro exitoso.");
+      reset();
+    } else {
+      context.setAuth({ ...context.auth, loading: false });
+      toast.error("Error al registrar.");
+    }
+  };
 
   return (
     <div className="register">
