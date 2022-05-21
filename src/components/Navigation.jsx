@@ -1,12 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Button,
-  Container,
-  Image,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from "react-bootstrap";
+import { Container, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import auth from "../api/auth";
 
@@ -56,7 +49,6 @@ const Navigation = () => {
                   <span>{context.auth.user.name}</span>
                 </div>
               }
-              id="collasible-nav-dropdown"
             >
               <NavDropdown.Item
                 className="bg-secondary text-white d-flex align-items-center justify-content-center"
