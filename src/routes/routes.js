@@ -6,11 +6,11 @@ import { authContext } from "../context/AuthContext";
 const Home = lazy(() => import("../pages/Home"));
 const Register = lazy(() => import("../pages/Register"));
 const Login = lazy(() => import("../pages/Login"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const Dashboard = lazy(() => import("../pages/Dashboard"));
 
 const AppRoutes = () => {
   const context = useContext(authContext);
-
-  console.log(context.auth);
 
   return useRoutes([
     {
@@ -25,6 +25,10 @@ const AppRoutes = () => {
           index: true,
           element: <Home />,
         },
+        {
+          path: "/dashboard",
+          element: <Dashboard />,
+        }
       ],
     },
     {
@@ -42,6 +46,10 @@ const AppRoutes = () => {
       ) : (
         <Register />
       ),
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]);
 };

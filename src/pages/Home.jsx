@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import "../assets/styles/home.scss";
-import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
+import "../assets/styles/app.scss";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Button, Col, Container, Form, Image, Row, Spinner } from "react-bootstrap";
 import jobs from "../api/jobs";
 import CourseCard from "../components/CourseCard";
 import { authContext } from "../context/AuthContext";
@@ -12,27 +12,61 @@ const Home = () => {
 
   const [jobList, setJobList] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await jobs.fetchAllJobs();
-      if (response.status === 200) {
-        setJobList(response.data);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchJobs = useCallback(async () => {
+    const response = await jobs.fetchAllJobs();
+    if (response.status === 200) {
+      setJobList(response.data);
+    }
+  }, [setJobList]);
 
-  console.log(
-    jobList &&
-      jobList.filter(
-        (job) =>
-          new Date(job.creationDate) >
-          new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)
-      )
-  );
+  const fetchApplications = useCallback(async () => {
+    const result = await jobs.fetchApplications();
+    if (result.status === 200) {
+      if (result.data.error) {
+        context.setAuth({
+          ...context.auth,
+          applications: [],
+        });
+      } else {
+        context.setAuth({
+          ...context.auth,
+          applications: result.data,
+        });
+      }
+    }
+  }, [context]);
+
+  const fetchOffers = useCallback(async () => {
+    const result = await jobs.fetchOffers();
+    if (result.status === 200) {
+      if (result.data.error) {
+        context.setAuth({
+          ...context.auth,
+          offers: [],
+        });
+      } else {
+        context.setAuth({
+          ...context.auth,
+          offers: result.data,
+        });
+      }
+    }
+  }, [context]);
+
+  useEffect(() => {
+    if (context.auth.isAuthenticated) {
+      fetchJobs();
+      if (context.auth.user.role === "applicant") {
+        fetchApplications();
+      }
+      if (context.auth.user.role === "employer") {
+        fetchOffers();
+      }
+    }
+  }, [context, fetchApplications, fetchJobs, fetchOffers]);
 
   return (
-    <div className="home">
+    <div className="home  pt-5">
       <section className="home__hero py-5 text-light">
         <Container>
           <Row className="justify-content-start mt-5">
@@ -135,7 +169,7 @@ const Home = () => {
                   )
                   .slice(0, 8)
                   .map((job) => (
-                    <Col sm={12} md={6} xl={3} key={job.id}>
+                    <Col sm={12} md={6} xl={3} key={job._id}>
                       <CourseCard job={job} />
                     </Col>
                   ))
@@ -143,7 +177,9 @@ const Home = () => {
                 <p>No hay ofertas disponibles</p>
               )
             ) : (
-              "Cargando..."
+              <Col className="d-flex align-items-center justify-content-center">
+                <Spinner animation="border" variant="primary" />
+              </Col>
             )}
           </Row>
         </Container>
@@ -210,7 +246,7 @@ const Home = () => {
               md={6}
               className="d-flex align-items-center justify-content-center"
             >
-              <Image src={jobImage} fluid style={{ height: 350 }} />
+              <Image src={jobImage} fluid style={{ maxHeight: 350 }} />
             </Col>
           </Row>
         </Container>

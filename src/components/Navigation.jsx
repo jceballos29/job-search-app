@@ -6,7 +6,7 @@ import auth from "../api/auth";
 import logo from "../assets/images/logo.png";
 import { authContext } from "../context/AuthContext";
 
-import { IoExit } from "react-icons/io5";
+import { IoClipboard, IoExit } from "react-icons/io5";
 
 const Navigation = () => {
   const context = useContext(authContext);
@@ -50,6 +50,10 @@ const Navigation = () => {
                 </div>
               }
             >
+              <NavDropdown.Item as={NavLink} end to={"/dashboard"}>
+                <IoClipboard size={20} className="me-3" />
+                <span>Dashboard</span>
+              </NavDropdown.Item>
               <NavDropdown.Item
                 className="bg-secondary text-white d-flex align-items-center justify-content-center"
                 onClick={handleLogout}

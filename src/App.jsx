@@ -1,5 +1,5 @@
 import "./assets/styles/app.scss";
-import { Suspense, useContext, useEffect } from "react";
+import { Suspense, useCallback, useContext, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Loading from "./pages/Loading";
 import AppRoutes from "./routes/routes";
@@ -12,28 +12,31 @@ const App = () => {
 
   const token = localStorage.getItem("jobSearchToken");
 
-  useEffect(() => {
-    const validate = async () => {
-      if (token) {
-        const result = await auth.validate();
-        if (result.status === 200) {
-          context.setAuth({
-            isAuthenticated: true,
-            user: result.data.user,
-            loading: false,
-          });
-        }
+  const validate = useCallback(async () => {
+    if (token) {
+      const result = await auth.validate();
+      if (result.status === 200) {
+        context.setAuth({
+          isAuthenticated: true,
+          user: result.data.user,
+          loading: false,
+          offers: null,
+          applications: null,
+        });
       }
-    };
+    }
+  }, [context, token]);
+
+  useEffect(() => {
     if (!context.auth.isAuthenticated) {
       validate();
     }
-  }, [context, token]);
+  }, [context, validate]);
 
   return (
     <BrowserRouter>
       <ToastContainer
-        position="top-center"
+        position="bottom-right"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={true}
