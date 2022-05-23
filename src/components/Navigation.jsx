@@ -7,6 +7,7 @@ import logo from "../assets/images/logo.png";
 import { authContext } from "../context/AuthContext";
 
 import { IoClipboard, IoExit } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const Navigation = () => {
   const context = useContext(authContext);
@@ -17,8 +18,12 @@ const Navigation = () => {
       isAuthenticated: false,
       user: null,
       loading: false,
+      applications: null,
+      offers: null,
     });
+    toast.success("Se ha cerrado la sesión");
   };
+  
 
   return (
     <Navbar
@@ -34,6 +39,14 @@ const Navigation = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to={"/"}>
+              Inicio  
+            </Nav.Link>
+            <Nav.Link as={NavLink} to={"/ofertas"}>
+              Ofertas
+            </Nav.Link>
+          </Nav>
           <Nav className="ms-auto">
             <NavDropdown
               title={

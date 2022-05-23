@@ -8,6 +8,8 @@ const Register = lazy(() => import("../pages/Register"));
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
+const Jobs = lazy(() => import("../pages/Jobs"));
+const Detail = lazy(() => import("../pages/Jobs/Detail"));
 
 const AppRoutes = () => {
   const context = useContext(authContext);
@@ -28,6 +30,14 @@ const AppRoutes = () => {
         {
           path: "/dashboard",
           element: <Dashboard />,
+        },
+        {
+          path: "/ofertas",
+          element: <Jobs />,
+        },
+        {
+          path: "/ofertas/:jobId",
+          element: <Detail />,
         }
       ],
     },

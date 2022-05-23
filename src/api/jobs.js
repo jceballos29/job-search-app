@@ -12,6 +12,43 @@ const fetchAllJobs = async () => {
   }
 };
 
+const fetchJobsByCategory = async (category) => {
+  try {
+    const response = await axios.post(
+      `jobs/category/`,
+      {
+        category: [category],
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
+
+const fetchJobsByLocation = async (location) => {
+  try {
+    const response = await axios.post(
+      `jobs/location/`,
+      {
+        country: location.country,
+        province: location.province,
+        city: location.city,
+      },
+      {
+        headers: authHeader(),
+      }
+    );
+
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
+
 const fetchJob = async (id) => {
   try {
     const response = await axios.get(`jobs/${id}`, {
@@ -71,7 +108,6 @@ const fetchApplications = async () => {
   }
 };
 
-
 const applyForJob = async (jobId) => {
   try {
     const response = await axios.put(
@@ -85,8 +121,7 @@ const applyForJob = async (jobId) => {
   } catch (error) {
     return error.response;
   }
-}
-
+};
 
 const unapplyForJob = async (jobId) => {
   try {
@@ -101,8 +136,7 @@ const unapplyForJob = async (jobId) => {
   } catch (error) {
     return error.response;
   }
-}
-
+};
 
 const fetchOffers = async () => {
   try {
@@ -121,6 +155,8 @@ const fetchOffers = async () => {
 
 const jobs = {
   fetchAllJobs,
+  fetchJobsByCategory,
+  fetchJobsByLocation,
   fetchJob,
   createJob,
   updateJob,
@@ -128,7 +164,7 @@ const jobs = {
   fetchApplications,
   fetchOffers,
   applyForJob,
-  unapplyForJob
+  unapplyForJob,
 };
 
 export default jobs;

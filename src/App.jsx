@@ -6,6 +6,7 @@ import AppRoutes from "./routes/routes";
 import { ToastContainer } from "react-toastify";
 import { authContext } from "./context/AuthContext";
 import auth from "./api/auth";
+import jobs from "./api/jobs";
 
 const App = () => {
   const context = useContext(authContext);
@@ -13,7 +14,6 @@ const App = () => {
   const token = localStorage.getItem("jobSearchToken");
 
   const validate = useCallback(async () => {
-    if (token) {
       const result = await auth.validate();
       if (result.status === 200) {
         context.setAuth({
@@ -24,14 +24,60 @@ const App = () => {
           applications: null,
         });
       }
+    
+  }, [context]);
+
+  const fetchApplications = useCallback(async () => {
+    const result = await jobs.fetchApplications();
+    if (result.status === 200) {
+      if (result.data.error) {
+        context.setAuth({
+          ...context.auth,
+          applications: [],
+        });
+      } else {
+        context.setAuth({
+          ...context.auth,
+          applications: result.data,
+        });
+      }
     }
-  }, [context, token]);
+  }, [context]);
+
+  const fetchOffers = useCallback(async () => {
+    const result = await jobs.fetchOffers();
+    if (result.status === 200) {
+      if (result.data.error) {
+        context.setAuth({
+          ...context.auth,
+          offers: [],
+        });
+      } else {
+        context.setAuth({
+          ...context.auth,
+          offers: result.data,
+        });
+      }
+    }
+  }, [context]);
 
   useEffect(() => {
-    if (!context.auth.isAuthenticated) {
+    if (token && !context.auth.isAuthenticated) {
       validate();
     }
-  }, [context, validate]);
+  }, [token, context, validate]);
+
+  useEffect(() => {
+    if (context.auth.isAuthenticated) {
+      
+      if (context.auth.user.role === "applicant") {
+        fetchApplications();
+      }
+      if (context.auth.user.role === "employer") {
+        fetchOffers();
+      }
+    }
+  }, [context, fetchApplications, fetchOffers]);
 
   return (
     <BrowserRouter>
