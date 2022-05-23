@@ -9,11 +9,10 @@ _Desplegado con [Vercel](https://vercel.com/)_
 4. Corre el ambiente local ``npm start``
 ## Construido con
 
-- [NodeJS](https://nodejs.org/es/) - v16.14.2
-- [ReactJS](https://maven.apache.org/) - v18.1.0
-## Autores
+- [NodeJS](https://nodejs.org/es/) 
+- [ReactJS](https://maven.apache.org/)
+## Autor
 
-* **Alexis López** - *Programador* - [Alexs18](https://github.com/Alexs18)
 * **Juan Ceballos** - *Programador* - [jceballos29](https://github.com/jceballos29)
 
 ## Licencia
