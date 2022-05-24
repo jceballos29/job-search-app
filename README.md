@@ -11,8 +11,9 @@ _Desplegado con [Vercel](https://vercel.com/)_
 
 - [NodeJS](https://nodejs.org/es/) 
 - [ReactJS](https://maven.apache.org/)
-## Autor
+## Autores
 
+* **Alexis López** - *Programador* - [Alexs18](https://github.com/Alexs18)
 * **Juan Ceballos** - *Programador* - [jceballos29](https://github.com/jceballos29)
 
 ## Licencia
