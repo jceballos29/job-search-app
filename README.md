@@ -1,6 +1,10 @@
 # [Job Search App](https://job-search-app-two.vercel.app/)
-
 _Desplegado con [Vercel](https://vercel.com/)_
+
+Aplicación sencilla que lista ofertas de trabajo, se podrá crear cuenta tanto como aplicante como empleador.
+Se permite como empleador crear ofertas y listar sus ofertas.
+Se permite como aplicante agregar y eliminar sus aplicaciones a las diferentes ofertas, también se podra filtar por categoría y ubicación.
+
 ### Instalación
 
 1. Clona el repositorio [https://github.com/jceballos29/job-search-app.git](https://github.com/jceballos29/job-search-app.git)
